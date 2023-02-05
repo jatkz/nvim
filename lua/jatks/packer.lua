@@ -14,13 +14,43 @@ return require('packer').startup(function(use)
   }
 
   use({
-	  'rose-pine/neovim',
-	  as = 'rose-pine',
+	  'sainnhe/gruvbox-material',
 	  config = function()
-		  require("rose-pine").setup()
-		  vim.cmd('colorscheme rose-pine')
+          vim.cmd('colorscheme gruvbox-material')
 	  end
   })
+
+  use({
+      'xiyaowong/nvim-transparent',
+      as = 'transparent',
+      config = function()
+          require("transparent").setup({
+              enable = true, -- boolean: enable transparent
+              extra_groups = { -- table/string: additional groups that should be cleared
+              -- In particular, when you set it to 'all', that means all available groups
+
+              -- example of akinsho/nvim-bufferline.lua
+              "BufferLineTabClose",
+              "BufferlineBufferSelected",
+              "BufferLineFill",
+              "BufferLineBackground",
+              "BufferLineSeparator",
+              "BufferLineIndicatorSelected",
+          },
+          exclude = {}, -- table: groups you don't want to clear
+      })
+    end
+    })
+
+
+--  use({
+--	  'rose-pine/neovim',
+--	  as = 'rose-pine',
+--	  config = function()
+--		  require("rose-pine").setup()
+--		  vim.cmd('colorscheme rose-pine')
+--	  end
+--  })
 
   use ('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate'})
   use ('nvim-treesitter/playground')
@@ -49,4 +79,7 @@ return require('packer').startup(function(use)
 		  {'rafamadriz/friendly-snippets'}, -- Optional
 	  }
   }
+
+    use("github/copilot.vim")
+
 end)
